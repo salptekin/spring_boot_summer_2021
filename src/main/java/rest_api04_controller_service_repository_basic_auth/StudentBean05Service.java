@@ -1,4 +1,4 @@
-package rest_api03;
+package rest_api04_controller_service_repository_basic_auth;
 
 import java.util.List;
 
@@ -6,25 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StudentBean04Service {
+public class StudentBean05Service {
 	
-	private StudentBean04Repository studentRepo;
+	private StudentBean05Repository studentRepo;
 	
 	@Autowired
-	public StudentBean04Service(StudentBean04Repository studentRepo) {
+	public StudentBean05Service(StudentBean05Repository studentRepo) {
 		this.studentRepo = studentRepo;
 	}
 	
-	public List<StudentBean04> listStudents(){
+	public List<StudentBean05> listStudents(){
 		return studentRepo.findAll();
 	}
 	
-	public StudentBean04 getStudentById(Long id) {
+	public StudentBean05 getStudentById(Long id) {
 		
 		if(studentRepo.findById(id).isPresent()) {
 			return studentRepo.findById(id).get();
 		}else {
-			return new StudentBean04();
+			return new StudentBean05();
 		}
 		
 	}

@@ -1,4 +1,4 @@
-package rest_api03;
+package rest_api03controller_service_repository_form_based_auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

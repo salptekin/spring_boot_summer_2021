@@ -1,4 +1,4 @@
-package rest_api04;
+package rest_api03controller_service_repository_form_based_auth;
 
 import java.util.List;
 
@@ -8,22 +8,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class StudentBean05Controller {
+public class StudentBean04Controller {
 	
-	private StudentBean05Service studentService;
+	private StudentBean04Service studentService;
 
 	@Autowired
-	public StudentBean05Controller(StudentBean05Service studentService) {
+	public StudentBean04Controller(StudentBean04Service studentService) {
 		this.studentService = studentService;
 	}
 	
 	@GetMapping(path="/allStudents")
-	public List<StudentBean05> getAllStudents(){
+	public List<StudentBean04> getAllStudents(){
 		return studentService.listStudents();
 	}
 	
 	@GetMapping(path="/allStudents/{id}")
-	public StudentBean05 getStudentById(@PathVariable Long id) {
+	public StudentBean04 getStudentById(@PathVariable Long id) {
 		return studentService.getStudentById(id);
 	}
 	

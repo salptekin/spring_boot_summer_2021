@@ -1,4 +1,4 @@
-package rest_api01;
+package rest_api01_controller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

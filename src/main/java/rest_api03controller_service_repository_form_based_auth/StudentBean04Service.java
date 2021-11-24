@@ -1,4 +1,4 @@
-package rest_api04;
+package rest_api03controller_service_repository_form_based_auth;
 
 import java.util.List;
 
@@ -6,25 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StudentBean05Service {
+public class StudentBean04Service {
 	
-	private StudentBean05Repository studentRepo;
+	private StudentBean04Repository studentRepo;
 	
 	@Autowired
-	public StudentBean05Service(StudentBean05Repository studentRepo) {
+	public StudentBean04Service(StudentBean04Repository studentRepo) {
 		this.studentRepo = studentRepo;
 	}
 	
-	public List<StudentBean05> listStudents(){
+	public List<StudentBean04> listStudents(){
 		return studentRepo.findAll();
 	}
 	
-	public StudentBean05 getStudentById(Long id) {
+	public StudentBean04 getStudentById(Long id) {
 		
 		if(studentRepo.findById(id).isPresent()) {
 			return studentRepo.findById(id).get();
 		}else {
-			return new StudentBean05();
+			return new StudentBean04();
 		}
 		
 	}

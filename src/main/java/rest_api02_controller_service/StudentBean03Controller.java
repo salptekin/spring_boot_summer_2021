@@ -1,4 +1,4 @@
-package rest_api02;
+package rest_api02_controller_service;
 
 import java.util.List;
 

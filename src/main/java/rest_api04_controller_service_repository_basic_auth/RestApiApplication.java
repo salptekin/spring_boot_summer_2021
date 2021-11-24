@@ -1,4 +1,4 @@
-package rest_api02;
+package rest_api04_controller_service_repository_basic_auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

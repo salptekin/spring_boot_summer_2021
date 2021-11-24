@@ -1,4 +1,4 @@
-package rest_api04;
+package rest_api04_controller_service_repository_basic_auth;
 
 import java.time.LocalDate;
 import java.time.Month;

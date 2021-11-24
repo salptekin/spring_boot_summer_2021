@@ -1,4 +1,4 @@
-package rest_api03;
+package rest_api04_controller_service_repository_basic_auth;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="students")
-public class StudentBean04 {
+public class StudentBean05 {
 	
 	@Id
 	private Long id;
@@ -18,12 +18,12 @@ public class StudentBean04 {
 	private Integer age;
 	private String errMsg;
 	
-	public StudentBean04() {
+	public StudentBean05() {
 		this.errMsg = "There is no any student like that...";
 		this.age = getAge();
 	}
 
-	public StudentBean04(Long id, String name, String email, LocalDate dob) {
+	public StudentBean05(Long id, String name, String email, LocalDate dob) {
 		this.id = id;
 		this.name = name;
 		this.email = email;

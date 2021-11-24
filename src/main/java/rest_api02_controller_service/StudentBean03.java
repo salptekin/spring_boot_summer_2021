@@ -1,35 +1,28 @@
-package rest_api04;
+package rest_api02_controller_service;
 
 import java.time.LocalDate;
 import java.time.Period;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="students")
-public class StudentBean05 {
+public class StudentBean03 {
 	
-	@Id
 	private Long id;
 	private String name;
 	private String email;
 	private LocalDate dob;
 	private Integer age;
+
 	private String errMsg;
 	
-	public StudentBean05() {
-		this.errMsg = "There is no any student like that...";
-		this.age = getAge();
-	}
-
-	public StudentBean05(Long id, String name, String email, LocalDate dob) {
+	public StudentBean03(Long id, String name, String email, LocalDate dob) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.dob = dob;
-		this.age = getAge();
 		this.errMsg = "No error...";
+	}
+	
+	public StudentBean03() {
+		this.errMsg = "There is no any students like that...";
 	}
 
 	public Long getId() {
@@ -74,8 +67,7 @@ public class StudentBean05 {
 
 	@Override
 	public String toString() {
-		return "StudentBean05 [id=" + id + ", name=" + name + ", email=" + email + ", dob=" + dob + ", age=" + age
-				+ ", errMsg=" + errMsg + "]";
+		return "id=" + id + ", name=" + name + ", email=" + email + ", dob=" + dob + ", age=" + age;
 	}
 
 }
