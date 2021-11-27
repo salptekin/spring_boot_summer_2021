@@ -83,14 +83,15 @@ public class StudentBean05Service {
 		
 		//To update email
 		Optional<StudentBean05> esixtingStudentByEmail = studentRepo.findStudentBean05ByEmail(newStudent.getEmail());
+
 		if(esixtingStudentByEmail.isPresent()) {
 			throw new IllegalStateException(newStudent.getEmail() + " exists. Emails must be unique...");
 		}else if(newStudent.getEmail()==null) {
 			throw new IllegalArgumentException("Email is mandatory to update data...");
 		}else if(!newStudent.getEmail().contains("@")) {
 			throw new IllegalArgumentException("Email is invalid please use valid format...");
-		}else if(!newStudent.getEmail().equals(esixtingStudentByEmail.get().getEmail())) {
-			esixtingStudentByEmail.get().setEmail(newStudent.getEmail());
+		}else if(!newStudent.getEmail().equals(existingStudentById.getEmail())) {
+			existingStudentById.setEmail(newStudent.getEmail());
 		}
 		
 		//To update DOB 
@@ -106,7 +107,7 @@ public class StudentBean05Service {
 		//To update error message
 		existingStudentById.setErrMsg("No error...");
 		
-		return null;
+		return studentRepo.save(existingStudentById);
 	}
 	
 	/*
@@ -149,14 +150,14 @@ public class StudentBean05Service {
 		}
 		
 		//To update dob
-		if(Period.between(newStudent.getDob(), LocalDate.now()).isNegative()) {
+		if(newStudent.getDob()==null) {
+			existingStudentById.setAge(existingStudentById.getAge());
+		}else if(Period.between(newStudent.getDob(), LocalDate.now()).isNegative()) {
 			throw new IllegalStateException("Date of birth cannot be greater than current date");
 		}else if(newStudent.getDob()!=null) {
 			existingStudentById.setDob(newStudent.getDob());
-		}
-		
-		//To update age
-		existingStudentById.setAge(newStudent.getAge());
+			existingStudentById.setAge(newStudent.getAge());
+		}		
 		
 		//To update Error Message
 		existingStudentById.setErrMsg("No error...");
