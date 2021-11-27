@@ -3,6 +3,7 @@ package rest_api04_controller_service_repository_basic_auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,8 +13,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+	/*
+	 	Admin ==> GET(Read), PUT + POST + PATCH + DELETE(Write)
+	 	Student ==> GET(Read)
+	 */
+
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled=true)//If you want to enable @PreAuthorize in any class use this.
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
@@ -22,6 +29,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable().//When you put those, it means you unblocked PUT, POST, PATCH, DELETE methods
 			authorizeRequests().
 			antMatchers("/", "index", "/css/*", "js/*").permitAll().
+			//antMatchers("/**").hasRole(ApplicationUserRoles.ADMIN.name()).//If you type that just ADMIN will be able to use all methods
+			                                                              //If you do not type that all roles will be able to use all methods 
 			anyRequest().
 			authenticated().
 			and().
@@ -42,10 +51,19 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 								builder().
 								username("techproed").
 								password(passwordEncoder.encode("password123")).
-								roles("STUDENT").
-								build();  
+								//roles(ApplicationUserRoles.STUDENT.name()).
+								authorities(ApplicationUserRoles.STUDENT.getGrantedAuthorities()).
+								build(); 
+		
+		UserDetails admin = User.
+								builder().
+								username("admin").
+								password(passwordEncoder.encode("nimda")).
+								//roles(ApplicationUserRoles.ADMIN.name()).
+								authorities(ApplicationUserRoles.ADMIN.getGrantedAuthorities()).
+								build();
 						
-		return new InMemoryUserDetailsManager(student);
+		return new InMemoryUserDetailsManager(student, admin);
 
 	}
 

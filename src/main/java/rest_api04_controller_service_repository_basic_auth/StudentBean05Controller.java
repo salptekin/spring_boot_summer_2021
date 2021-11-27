@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,31 +26,37 @@ public class StudentBean05Controller {
 	}
 	
 	@GetMapping(path="/allStudents")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_STUDENT')")
 	public List<StudentBean05> getAllStudents(){
 		return studentService.listStudents();
 	}
 	
 	@GetMapping(path="/allStudents/{id}")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_STUDENT')")
 	public StudentBean05 getStudentById(@PathVariable Long id) {
 		return studentService.getStudentById(id);
 	}
 	
 	@DeleteMapping(path="/deleteStudent/{id}")
+	@PreAuthorize("hasAuthority('student:write')")
 	public String deleteStudentById(@PathVariable Long id) {
 		return studentService.deleteStudentById(id);
 	}	
 	
 	@PutMapping(path="/updateStudentFully/{id}")
-	public StudentBean05 fullyUpdateStudentById(@PathVariable Long id, @Validated @RequestBody StudentBean05 newStudent) {
+	@PreAuthorize("hasAuthority('student:write')")
+	public StudentBean05 fullyUpdateStudentById(@PathVariable Long id, @RequestBody StudentBean05 newStudent) {
 		return studentService.fullyUpdateStudent(id, newStudent);
 	}
 	
 	@PatchMapping(path="/updateStudentPartially/{id}")
-	public StudentBean05 partiallyUpdateStudentById(@PathVariable Long id, @Validated @RequestBody StudentBean05 newStudent) {
+	@PreAuthorize("hasAuthority('student:write')")
+	public StudentBean05 partiallyUpdateStudentById(@PathVariable Long id, @RequestBody StudentBean05 newStudent) {
 		return studentService.partiallyUpdateStudent(id, newStudent);
 	}	
 	
 	@PostMapping(path="/addNewStudent")
+	@PreAuthorize("hasAuthority('student:write')")
 	public StudentBean05 postStudent(@Validated @RequestBody StudentBean05 newStudent) throws ClassNotFoundException, SQLException {
 		return studentService.addNewStudent(newStudent);
 	}
