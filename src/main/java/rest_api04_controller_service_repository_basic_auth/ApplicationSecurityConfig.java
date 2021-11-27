@@ -19,7 +19,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.
+		http.csrf().disable().//When you put those, it means you unblocked PUT, POST, PATCH, DELETE methods
 			authorizeRequests().
 			antMatchers("/", "index", "/css/*", "js/*").permitAll().
 			anyRequest().
@@ -43,12 +43,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 								username("techproed").
 								password(passwordEncoder.encode("password123")).
 								roles("STUDENT").
-								build(); 
-		
+								build();  
+						
 		return new InMemoryUserDetailsManager(student);
 
 	}
-	
-	
 
 }
